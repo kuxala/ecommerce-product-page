@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
-
+import Header from "./components/Header";
 function App() {
   const [showSideMenu, setShowSideMenu] = useState(false);
   const [count, setCount] = useState(0);
@@ -12,6 +12,7 @@ function App() {
     height: window.innerHeight,
   });
 
+  
   const styles = {
     position: "absolute",
     top: "10%",
@@ -46,78 +47,15 @@ function App() {
 
   const page = (
     <div className="wrapper">
-      <header>
-        <div className="left-side">
-          <img
-            src="../src/Shape.svg"
-            className={windowSize.width > 768 ? "display-none" : "none"}
-            onClick={() => {
-              setShowSideMenu(!showSideMenu);
-            }}
-          />
-          <img src="../src/Sneakers.svg" className="left-second" />
+      <Header
+        windowSize={windowSize}
+        showSideMenu={showSideMenu}
+        setShowSideMenu={setShowSideMenu}
+        showCard={showCard}
+        setShowCard={setShowCard}
+        count={count}
+      />
 
-          <nav className={windowSize.width < 768 ? "display-none" : "araferi"}>
-            <ul>
-              <li>Collections</li>
-              <li>Men</li>
-              <li>Women</li>
-              <li>About</li>
-              <li>Contact</li>
-            </ul>
-          </nav>
-        </div>
-        {/* {width > 768 ? "display-none" : "sideMenu" } */}
-        <div className={showSideMenu ? "sideMenu" : "display-none"}>
-          <div className={!showSideMenu ? "display-none" : "none"}>
-            <img
-              src="../src/x.svg"
-              onClick={() => {
-                setShowSideMenu(!showSideMenu);
-              }}
-            />
-          </div>
-          <ul>
-            <li>Collections</li>
-            <li>Men</li>
-            <li>Women</li>
-            <li>About</li>
-            <li>Contact</li>
-          </ul>
-        </div>
-
-        <div className="right-side">
-          <img
-            src="../src/card.svg"
-            className="right-first"
-            onClick={() => {
-              setShowCard(!showCard);
-            }}
-          />
-
-          <img
-            src="../src/logo.png"
-            width="24px"
-            height="24px"
-            className="logo"
-          />
-        </div>
-
-        <div className={!showCard ? "display-none" : "card"}>
-          <p id="card">Card</p>
-          <div id="card-div">
-            <img src="../src/product.png" width="50px" height="50px" />
-            <p>Fall Limited Edition Sneakers</p>
-            <div>
-              <p>$125.00</p>x{count}
-              <p className="total">${125 * count}</p>
-              <img src="../src/trash.svg" />
-            </div>
-          </div>
-          <button>Checkout</button>
-        </div>
-      </header>
-      {/* ////////////////////////Main////////////////////////////////// */}
       <main>
         <div className="left-col">
           {/* <div className="arrows">
