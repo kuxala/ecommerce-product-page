@@ -3,10 +3,14 @@ import "../App.css"
 
 
 function Header(props:any) {
+  const ss = {
+    marginTop: "20px",
+  }
     return (
         <>
         <header>
-        <div className="left-side">
+        <div className="left-side" >
+          
           <img
             src="../src/Shape.svg"
             className={props.windowSize.width > 768 ? "display-none" : "none"}
@@ -64,15 +68,19 @@ function Header(props:any) {
 
         <div className={!props.showCard ? "display-none" : "card"}>
           <p id="card">Card</p>
+          {props.showProduct ? 
           <div id="card-div">
             <img src="../src/product.png" width="50px" height="50px" />
             <p>Fall Limited Edition Sneakers</p>
             <div>
               <p>$125.00</p>x{props.count}
               <p className="total">${125 * props.count}</p>
-              <img src="../src/trash.svg" />
+              <img src="../src/trash.svg" onClick={() => {
+                props.setShowProduct(false)
+              }}/>
             </div>
           </div>
+          : <p style={ss}>Card is Empty</p>}
           <button>Checkout</button>
         </div>
       </header>

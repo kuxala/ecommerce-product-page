@@ -1,33 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
+import Left from "./components/Left";
 function App() {
   const [showSideMenu, setShowSideMenu] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [showCard, setShowCard] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [imageFullScreen, setImageFullScreen] = useState(false);
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
-    height: window.innerHeight,
+    height: window.innerHeight,  
   });
-
-  
-  const styles = {
-    position: "absolute",
-    top: "10%",
-    left: "0",
-    width: "750px",
-    height: "750px",
-    marginLeft: "auto",
-    marginRight: "auto",
-    right: "0",
-    textAlign: "center",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "#f0f0f0",
-  };
-  const nothing = {};
+  const[showProduct, setShowProduct] = useState(false)
 
   const MyComponent = () => {
     useEffect(() => {
@@ -54,67 +39,38 @@ function App() {
         showCard={showCard}
         setShowCard={setShowCard}
         count={count}
+        showProduct={showProduct}
+        setShowProduct={setShowProduct}
       />
 
       <main>
-        <div className="left-col">
-          {/* <div className="arrows">
-          <img src="../src/left-arrow.svg" className="left-arrow" />
-          <img src="../src/right-arrow.svg" className="right-arrow" />
-        </div> */}
-          <img
-            src="../src/product.png"
-            width="375px"
-            height="300px"
-            style={isFullScreen ? styles : nothing}
-            className="product"
-            onClick={() => {
-              setIsFullScreen(!isFullScreen);
-            }}
-          />
-          <div
-            className={
-              windowSize.width < 768 ? "display-none" : "small-products"
-            }
-          >
-            <img
-              src="../src/product.png"
-              width="88px"
-              height="88px"
-              style={imageFullScreen ? styles : nothing}
-              onClick={() => {
-                setImageFullScreen(!imageFullScreen);
-              }}
-            />
-            <img
-              src="../src/product-2.png"
-              width="88px"
-              height="88px"
-              style={imageFullScreen ? styles : nothing}
-              onClick={() => {
-                setImageFullScreen(!imageFullScreen);
-              }}
-            />
-            <img
-              src="../src/product-3.png"
-              width="88px"
-              height="88px"
-              style={imageFullScreen ? styles : nothing}
-              onClick={() => {
-                setImageFullScreen(!imageFullScreen);
-              }}
-            />
-            <img
-              src="../src/product-4.png"
-              width="88px"
-              height="88px"
-              style={imageFullScreen ? styles : nothing}
-              onClick={() => {
-                setImageFullScreen(!imageFullScreen);
-              }}
-            />
-          </div>
-        </div>
+
+        <Left
+          isFullScreen={isFullScreen}
+          setIsFullScreen={setIsFullScreen}
+          imageFullScreen={imageFullScreen}
+          setImageFullScreen={setImageFullScreen}
+          windowSize={windowSize}
+        />
+        
+        {isFullScreen ? (
+          <>
+            <div className="slider-wrapper">
+              <Left
+                isFullScreen={isFullScreen}
+                setIsFullScreen={setIsFullScreen}
+                imageFullScreen={imageFullScreen}
+                setImageFullScreen={setImageFullScreen}
+                windowSize={windowSize}
+              />
+            </div>
+            <div className="background-col" onClick={() => {
+              //  setIsFullScreen(!isFullScreen)
+            }}>
+              
+            </div>
+          </>
+        ) : null}
 
         <div className="right-col">
           <div className="product-text">
@@ -155,7 +111,10 @@ function App() {
               />
             </div>
 
-            <button>
+            <button onClick={()=>{
+              // setShowCard(!showCard)
+              setShowProduct(true)  
+            }}>
               <img src="../src/whiteShape.svg" />
               Add to card
             </button>
