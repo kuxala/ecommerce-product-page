@@ -40,7 +40,7 @@ function App() {
         setShowCard={setShowCard}
         count={count}
         showProduct={showProduct}
-        setShowProduct={setShowProduct}
+          
       />
 
       <main>

@@ -35,12 +35,16 @@ const [mainImage,setMainImage] = useState("../src/product.png")
             }}
           />
         ) : null}
-        {/* {isFullScreen ? (
+        {isFullScreen ? (
           <div className="arrows">
-            <img src="../src/left-arrow.svg" className="left-arrow" />
-            <img src="../src/right-arrow.svg" className="right-arrow" />
+            <img src="../src/left-arrow.svg" className="left-arrow" onClick={() =>{
+              // setIsFullScreen(imageUrls ? )
+            }}/>
+            <img src="../src/right-arrow.svg" className="right-arrow" onClick={() =>{
+
+            }}/>
           </div>
-        ) : null} */}
+        ) : null}
 
         {mainImage ? 
         <img
