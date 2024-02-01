@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSpring, animated } from 'react-spring';
+
 import "./App.css";
 import Header from "./components/Header";
 import Left from "./components/Left";
@@ -8,11 +10,17 @@ function App() {
   const [showCard, setShowCard] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [imageFullScreen, setImageFullScreen] = useState(false);
+  const[showProduct, setShowProduct] = useState(false)
+
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,  
   });
-  const[showProduct, setShowProduct] = useState(false)
+
+  const fadeInAnimation = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+  })
 
   const MyComponent = () => {
     useEffect(() => {
@@ -31,7 +39,7 @@ function App() {
   MyComponent();
 
   const page = (
-    <div className="wrapper">
+    <animated.div className="wrapper" style={fadeInAnimation}>
       <Header
         windowSize={windowSize}
         showSideMenu={showSideMenu}
@@ -40,7 +48,7 @@ function App() {
         setShowCard={setShowCard}
         count={count}
         showProduct={showProduct}
-          
+        setShowProduct={setShowProduct}
       />
 
       <main>
@@ -51,6 +59,7 @@ function App() {
           imageFullScreen={imageFullScreen}
           setImageFullScreen={setImageFullScreen}
           windowSize={windowSize}
+          fadeInAnimation={fadeInAnimation}
         />
         
         {isFullScreen ? (
@@ -62,6 +71,7 @@ function App() {
                 imageFullScreen={imageFullScreen}
                 setImageFullScreen={setImageFullScreen}
                 windowSize={windowSize}
+                fadeInAnimation={fadeInAnimation}
               />
             </div>
             <div className="background-col" onClick={() => {
@@ -72,7 +82,7 @@ function App() {
           </>
         ) : null}
 
-        <div className="right-col">
+        <div className="right-col" >
           <div className="product-text">
             <p className="first-p">Sneaker Company</p>
             <h1 className="product-name">Fall Limited Edition Sneakers</h1>
@@ -121,7 +131,7 @@ function App() {
           </div>
         </div>
       </main>
-    </div>
+    </animated.div>
   );
 
   return page;
